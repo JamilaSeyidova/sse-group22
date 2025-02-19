@@ -11,7 +11,7 @@ We will measure and analyze energy consumption for **video streaming**, focusing
 
 ## 📢 Contributors  
 👥 **Group 22 - TU Delft Sustainable Software Engineering CS4575**  
-- [Chan, Michael](https://github.com/yourgithub)  
+- [Chan, Michael](https://github.com/MichaelChan20)  
 - [Margadant, Gijs](https://github.com/yourgithub)  
 - [Negro, Roberto](https://github.com/RobertoN0)
 - [Seyidova, Jamila](https://github.com/JamilaSeyidova) 
