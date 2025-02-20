@@ -1,23 +1,9 @@
-import os
 import random
 from time import sleep
-from energibridge.energiBridge import EnergiBridge
-from energibridge.experiment import Experiment
+from src.energiBridge import Task
+from src.experiment import Experiment
 
-class Task:
-    def __init__(self, id, experiment: Experiment, settings):
-        self.id = id
-        self.experiment = experiment
-        self.settings = settings
-
-    @property
-    def output_path(self):
-        return os.path.join(self.settings.output, self.experiment.name, str(self.id))
-
-    def run(self):
-        EnergiBridge(self.settings).run(self)
-
-def generate_tasks(experiments: [experiment], settings):
+def generate_tasks(experiments: [Experiment], settings):
     tasks = []
     row = 0
     for experiment in experiments:

@@ -1,0 +1,9 @@
+argparse
+PyYAML
+matplotlib
+seaborn
+pandas
+numpy
+pyuac
+pypiwin32
+pytubefix
