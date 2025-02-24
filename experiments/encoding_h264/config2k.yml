@@ -1,0 +1,8 @@
+name: mp4-encoding-h264-2k
+description: "Encode an MP4 video using H.264 codec at 2K resolution."
+enabled: true
+variables:
+  c: "ffmpeg -y -i experiments/test.mp4 -r 30 -vf scale=2560:1440 -c:v libx264 -preset slow -crf 22 output_h264_2k.mp4; y"
+linux-cmd: pwsh -Command $c
+macos-cmd: pwsh -Command $c
+windows-cmd: powershell -Command $c

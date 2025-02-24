@@ -1,0 +1,8 @@
+name: mp4-encoding-h265-720p
+description: "Encode an MP4 video using H.265 codec at 720p resolution."
+enabled: true
+variables:
+  c: "ffmpeg -y -i experiments/test.mp4 -r 30 -vf scale=1280:720 -c:v libx265 -preset slow -crf 28 output_h265_720p.mp4"
+linux-cmd: pwsh -Command $c
+macos-cmd: pwsh -Command $c
+windows-cmd: powershell -Command $c
