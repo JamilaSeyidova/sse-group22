@@ -1,0 +1,8 @@
+name: mp4-decoding
+description: "Decode an MP4 video using H.264 codecs to display video."
+enabled: false
+variables:
+  c: "ffplay encoded_video_h264.mp4"
+linux-cmd: pwsh -Command $c
+macos-cmd: pwsh -Command $c
+windows-cmd: powershell -Command $c
