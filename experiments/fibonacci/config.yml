@@ -1,6 +1,6 @@
 name: fibonacci
 description: "Fibonacci"
-enabled: true
+enabled: false
 variables:
   c: "$n = 10000; $a = [bigint]0; $b = [bigint]1; for ($i=1; $i -lt $n; $i++) { $temp = $a + $b; $a = $b; $b = $temp }; $b"
 linux-cmd: pwsh -Command $c
