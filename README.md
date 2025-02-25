@@ -35,7 +35,7 @@ Running `converter` will automatically create al the necessary videos.
 The experiments can be run by running `main`. Before doing so, make sure you are in an elevated (Admin) environment. The output of all experiments will be written to the `results` folder.
 
 The following settings were used during the execution of the experiment:
-- Computer connected to power outlet
+- Computer connected to wall outlet and the battery was fully charged
 - Airplane modus enabled
 - All other programs and processes closed (`main` was run through the command line)
 - No external devices were connected
