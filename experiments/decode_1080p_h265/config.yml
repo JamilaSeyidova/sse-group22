@@ -1,0 +1,8 @@
+name: decode_1080p_h265
+description: "Decode and ignore output"
+enabled: true
+variables:
+  c: "ffmpeg -i converted/1080p_H.265.mp4 -f null NUL"
+linux-cmd: pwsh -Command $c
+macos-cmd: pwsh -Command $c
+windows-cmd: powershell -Command $c

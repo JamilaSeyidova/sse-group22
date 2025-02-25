@@ -2,7 +2,7 @@ name: warmup
 description: "Warmup the system for more accurate measurements by computing the 10,000'th fibonacci number"
 enabled: false
 variables:
-  c: "$n = 10000; $a = [bigint]0; $b = [bigint]1; for ($i=1; $i -lt $n; $i++) { $temp = $a + $b; $a = $b; $b = $temp }; $b"
+  c: "for ($j = 1000; $j -le 1030; $j++) { $n = $j; $a = [bigint]0; $b = [bigint]1; for ($i=1; $i -lt $n; $i++) { $temp = $a + $b; $a = $b; $b = $temp }; $b}"
 linux-cmd: pwsh -Command $c
 macos-cmd: pwsh -Command $c
 windows-cmd: powershell -Command $c

@@ -1,8 +1,8 @@
-name: nuldecoding_h265
+name: decode_720p_h265
 description: "Decode and ignore output"
 enabled: true
 variables:
-  c: "ffmpeg -i encoded_video_h265.mp4 -f null NUL"
+  c: "ffmpeg -i converted/720p_H.265.mp4 -f null NUL"
 linux-cmd: pwsh -Command $c
 macos-cmd: pwsh -Command $c
 windows-cmd: powershell -Command $c

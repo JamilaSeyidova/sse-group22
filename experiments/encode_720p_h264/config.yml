@@ -1,0 +1,12 @@
+name: encode_720p_h264
+description: "encode and ignore output"
+enabled: true
+variables:
+  input: original/4k.mp4
+  cv: libx264
+  preset: medium
+  crf: 23
+  scale: 1280:720
+linux-cmd: ffmpeg -i $input -c:v $cv -preset $preset -crf $crf -f null NUL
+macos-cmd: ffmpeg -i $input -c:v $cv -preset $preset -crf $crf -f null NUL
+windows-cmd: ffmpeg -i $input -c:v $cv -preset $preset -crf $crf -f null NUL
