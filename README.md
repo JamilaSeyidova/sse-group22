@@ -17,9 +17,12 @@ sc start rapl
 Put the video you want to run the experiments with inside `videos > Original`.
 This can, for example, be a 4K mp4 video which gets converted to other formats and resolutions for the experiments.
 
-### 3. Convert the input video
+### 3. Install dependencies
+Install all the required dependencies by running `pip install -r requirements.txt`.
+
+### 4. Convert the input video
 Each experiment requires an input video of a specific format and resolutions.
 Running `converter` will automatically create al the necessary videos.
 
-### 4. Run the experiments
+### 5. Run the experiments
 The experiments can be run by running `main`. Before doing so, make sure you are in an elevated (Admin) environment. The output of all experiments will be written to the `results` folder.
