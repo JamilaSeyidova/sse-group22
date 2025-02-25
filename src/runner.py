@@ -1,4 +1,6 @@
+import os
 import random
+from pathlib import Path
 from time import sleep
 from src.energiBridge import Task
 from src.experiment import Experiment
@@ -17,8 +19,10 @@ def generate_tasks(experiments: [Experiment], settings):
     else:
         return tasks
 
-def run(experiments: [Experiment], settings):
+def run(experiments: [Experiment], settings, workdir = None):
     tasks = generate_tasks(experiments, settings)
+    if workdir:
+        os.chdir(Path(workdir))
     for task in tasks:
         task.run()
         sleep(settings.sleep)

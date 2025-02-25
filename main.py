@@ -1,6 +1,5 @@
 import argparse
 import os, sys, datetime
-from pyuac import main_requires_admin
 
 from src.experiment import get_experiments, Experiment
 from src.runner import run
@@ -23,7 +22,7 @@ def cli():
                         dest="sleep",
                         type=int,
                         nargs='?',
-                        default=5)
+                        default=30)
     parser.add_argument("-i", "--interval",
                         help="Interval between measurements.",
                         dest="interval",
@@ -35,7 +34,7 @@ def cli():
                         dest="warmup",
                         type=int,
                         nargs='?',
-                        default=0)
+                        default=20)
     parser.add_argument("-o", "--output",
                         help="Output directory.",
                         dest="output",
@@ -48,14 +47,13 @@ def cli():
                         choices=["all"] + [e.name for e in experiments],
                         type=str,
                         nargs='*',
-                        default="all")
+                        default=["encode_480p_h264"])
     return parser.parse_args()
 
-@main_requires_admin
 def main():
     args = cli()
     experiments = []
-    if args.experiments == "all":
+    if "all" in args.experiments:
         experiments = get_experiments()
     else:
         for experiment in args.experiments:
@@ -66,7 +64,7 @@ def main():
     if not os.path.isabs(args.output):
         args.output = os.path.join(os.getcwd(), args.output, sys.platform)
     args.output = os.path.join(args.output, datetime.datetime.now().strftime("%Y-%m-%d-%H-%M-%S"))
-    run(experiments, args)
+    run(experiments, args, 'videos')
 
 
 if __name__ == '__main__':
