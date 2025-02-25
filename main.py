@@ -47,7 +47,7 @@ def cli():
                         choices=["all"] + [e.name for e in experiments],
                         type=str,
                         nargs='*',
-                        default=["encode_480p_h264"])
+                        default=["all"])
     return parser.parse_args()
 
 def main():
