@@ -21,7 +21,7 @@ winget install ffmpeg
 ```
 
 ### 3. Configure Video
-Put the video you want to run the experiments with inside `videos > Original`.
+Put the video you want to run the experiments with inside `videos>Original`.
 This can, for example, be a 4K mp4 video which gets converted to other formats and resolutions for the experiments.
 
 ### 4. Install dependencies
