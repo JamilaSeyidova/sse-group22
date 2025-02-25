@@ -2,11 +2,13 @@ name: encode_720p_h265
 description: "encode and ignore output"
 enabled: true
 variables:
-  input: original/4k.mp4
+  input: videos/Original/4k.mp4
   cv: libx265
   preset: medium
-  crf: 23
+  crf: 28
   scale: 1280:720
-linux-cmd: ffmpeg -i $input -c:v $cv -preset $preset -crf $crf -f null NUL
-macos-cmd: ffmpeg -i $input -c:v $cv -preset $preset -crf $crf -f null NUL
-windows-cmd: ffmpeg -i $input -c:v $cv -preset $preset -crf $crf -f null NUL
+  rate: 30
+  loglevel: quiet
+linux-cmd: ffmpeg -i $input -c:v $cv -preset $preset -crf $crf -vf scale=$scale -r $rate -loglevel $loglevel -f null NUL
+macos-cmd: ffmpeg -i $input -c:v $cv -preset $preset -crf $crf -vf scale=$scale -r $rate -loglevel $loglevel -f null NUL
+windows-cmd: ffmpeg -i $input -c:v $cv -preset $preset -crf $crf -vf scale=$scale -r $rate -loglevel $loglevel -f null NUL

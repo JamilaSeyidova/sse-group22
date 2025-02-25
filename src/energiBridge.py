@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import subprocess, os, sys, datetime, json
+from pathlib import Path
 
 from src.experiment import Experiment
 
@@ -51,10 +52,16 @@ class EnergiBridge:
             "energiBridgeCmd": " ".join(self.cmd(task)),
             "taskCmd": task.experiment.command,
         }
+
+        file = Path(task.log_output_path).relative_to(os.getcwd()).as_posix()
+        os.environ["FFREPORT"] = f'file={file}:level=32'
+        os.environ["RUST_BACKTRACE"] = "full"
+        print(f"[TASK {task.experiment.name} - {task.id}] started at {start}", end=' ')
         try:
-            subprocess.Popen(" ".join(self.cmd(task) + ['--', task.experiment.command]), shell=True).wait()
+            process = subprocess.Popen(" ".join(self.cmd(task) + ['--', task.experiment.command]), shell=True)
+            process.wait()
         finally:
-            print(f"[TASK {task.experiment.name} - {task.id}] DONE in {datetime.datetime.now() - start}")
+            print(f"DONE in {datetime.datetime.now() - start}")
             o["endingTime"] = datetime.datetime.now().isoformat()
             with open(task.info_output_path, "w") as f:
                 json.dump(o, f, indent=4)

@@ -22,7 +22,7 @@ def cli():
                         dest="sleep",
                         type=int,
                         nargs='?',
-                        default=30)
+                        default=60)
     parser.add_argument("-i", "--interval",
                         help="Interval between measurements.",
                         dest="interval",
@@ -34,7 +34,7 @@ def cli():
                         dest="warmup",
                         type=int,
                         nargs='?',
-                        default=20)
+                        default=1)
     parser.add_argument("-o", "--output",
                         help="Output directory.",
                         dest="output",
@@ -64,7 +64,7 @@ def main():
     if not os.path.isabs(args.output):
         args.output = os.path.join(os.getcwd(), args.output, sys.platform)
     args.output = os.path.join(args.output, datetime.datetime.now().strftime("%Y-%m-%d-%H-%M-%S"))
-    run(experiments, args, 'videos')
+    run(experiments, args)
 
 
 if __name__ == '__main__':

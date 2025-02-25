@@ -2,7 +2,7 @@ name: decode_480p_h265
 description: "Decode and ignore output"
 enabled: true
 variables:
-  c: "ffmpeg -i converted/480p_H.265.mp4 -f null NUL"
+  c: "ffmpeg -i videos/converted/480p_H.265.mp4 -loglevel quiet -f null NUL"
 linux-cmd: pwsh -Command $c
 macos-cmd: pwsh -Command $c
 windows-cmd: powershell -Command $c
