@@ -1,6 +1,6 @@
 import argparse
 import os, sys, datetime
-from pyuac import main_requires_admin
+# from pyuac import main_requires_admin
 
 from src.experiment import get_experiments, Experiment
 from src.runner import run
@@ -51,7 +51,7 @@ def cli():
                         default="all")
     return parser.parse_args()
 
-@main_requires_admin
+# @main_requires_admin
 def main():
     args = cli()
     experiments = []
