@@ -53,7 +53,11 @@ class EnergiBridge:
             "taskCmd": task.experiment.command,
         }
 
-        file = Path(task.log_output_path).relative_to(os.getcwd()).as_posix()
+        #file = Path(task.log_output_path).relative_to(os.getcwd()).as_posix()
+        log_output_path_abs = os.path.abspath(task.log_output_path)
+        file = Path(log_output_path_abs).relative_to(Path(os.getcwd())).as_posix()
+
+        
         os.environ["FFREPORT"] = f'file={file}:level=32'
         os.environ["RUST_BACKTRACE"] = "full"
         print(f"[TASK {task.experiment.name} - {task.id}] started at {start}", end=' ')
