@@ -1,8 +1,8 @@
 import os
 import subprocess
 from pathlib import Path
-#video_path = Path('./videos/Original/4k.mp4')
-video_path = Path('sse-group22/Original/4k.mp4')
+video_path = Path('./videos/Original/4k.mp4')
+#video_path = Path('sse-group22/Original/4k.mp4')
 output_folder = Path('./videos/converted/')
 codecs = ['H.264', 'H.265']
 resolutions = [2160]#[2160, 1080, 720, 480]
