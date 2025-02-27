@@ -1,0 +1,184 @@
+ffmpeg started on 2025-02-26 at 23:18:01
+Report written to "results/480p/2025-02-26-22-58-11/decode_480p_h265/logs/49.log"
+Log level: 32
+Command line:
+"C:\\Users\\gijsm\\AppData\\Local\\Microsoft\\WinGet\\Packages\\Gyan.FFmpeg_Microsoft.Winget.Source_8wekyb3d8bbwe\\ffmpeg-7.1-full_build\\bin\\ffmpeg.exe" -i videos/converted/480p_H.265.mp4 -loglevel quiet -f null NUL
+ffmpeg version 7.1-full_build-www.gyan.dev Copyright (c) 2000-2024 the FFmpeg developers
+  built with gcc 14.2.0 (Rev1, Built by MSYS2 project)
+  configuration: --enable-gpl --enable-version3 --enable-static --disable-w32threads --disable-autodetect --enable-fontconfig --enable-iconv --enable-gnutls --enable-libxml2 --enable-gmp --enable-bzlib --enable-lzma --enable-libsnappy --enable-zlib --enable-librist --enable-libsrt --enable-libssh --enable-libzmq --enable-avisynth --enable-libbluray --enable-libcaca --enable-sdl2 --enable-libaribb24 --enable-libaribcaption --enable-libdav1d --enable-libdavs2 --enable-libopenjpeg --enable-libquirc --enable-libuavs3d --enable-libxevd --enable-libzvbi --enable-libqrencode --enable-librav1e --enable-libsvtav1 --enable-libvvenc --enable-libwebp --enable-libx264 --enable-libx265 --enable-libxavs2 --enable-libxeve --enable-libxvid --enable-libaom --enable-libjxl --enable-libvpx --enable-mediafoundation --enable-libass --enable-frei0r --enable-libfreetype --enable-libfribidi --enable-libharfbuzz --enable-liblensfun --enable-libvidstab --enable-libvmaf --enable-libzimg --enable-amf --enable-cuda-llvm --enable-cuvid --  libavutil      59. 39.100 / 59. 39.100
+  libavcodec     61. 19.100 / 61. 19.100
+  libavformat    61.  7.100 / 61.  7.100
+  libavdevice    61.  3.100 / 61.  3.100
+  libavfilter    10.  4.100 / 10.  4.100
+  libswscale      8.  3.100 /  8.  3.100
+  libswresample   5.  3.100 /  5.  3.100
+  libpostproc    58.  3.100 / 58.  3.100
+Input #0, mov,mp4,m4a,3gp,3g2,mj2, from 'videos/converted/480p_H.265.mp4':
+  Metadata:
+    major_brand     : isom
+    minor_version   : 512
+    compatible_brands: isomiso2mp41
+    title           : Combining Einstein's Theory with Quantum Mechanics | TU Delft Quantum researchers highlighted
+    artist          : TU Delft
+    date            : 20240903
+    encoder         : Lavf61.7.100
+    comment         : https://www.youtube.com/watch?v=rlVE2fivjs4
+    description     : Join Professor Gary Steele from the Quantum Nanoscience department at TU Delft as he shares his passion for experimental physics. 
+                    : 
+                    : In his lab, Gary Steele explores the fascinating intersection of Einstein's theory of general relativity and quantum mechanics. The technologies being developed in his lab range from ultrasensitive detectors to innovative qubits for quantum computers. Lea
+                    : 
+                    : Timestamps
+                    : 00:00:00 Meet Gary Steele: Professor of Physics at Delft University of Technology
+                    : 00:00:17 Exploring Tiny Drums 
+                    : 00:00:31 The Goal: Unraveling Mysteries of the Universe
+                    : 00:00:47 Borrowing tricks from the Quantum Computer
+                    : 00:01:05 Gary Steele's Passion for Experimental Physics
+                    : 
+                    : More information
+                    : - More about this research: https://edu.nl/rrakt
+                    : - More about Gary Steele: https://edu.nl/v9tke
+                    : - More about Digital Society research at TU Delft: https://edu.nl/qdgkd
+                    : - More about the Faculty Applied Sciences at TU Delft: https://edu.nl/pq3kc
+                    : 
+                    : Social Media Channels of TU Delft
+                    : - Instagram: https://edu.nl/upny4
+                    : - LinkedIn: https://edu.nl/cb3y8
+                    : - X: https://edu.nl/drfmj
+                    : - Facebook: https://edu.nl/nkvhj
+    synopsis        : Join Professor Gary Steele from the Quantum Nanoscience department at TU Delft as he shares his passion for experimental physics. 
+                    : 
+                    : In his lab, Gary Steele explores the fascinating intersection of Einstein's theory of general relativity and quantum mechanics. The technologies being developed in his lab range from ultrasensitive detectors to innovative qubits for quantum computers. Lea
+                    : 
+                    : Timestamps
+                    : 00:00:00 Meet Gary Steele: Professor of Physics at Delft University of Technology
+                    : 00:00:17 Exploring Tiny Drums 
+                    : 00:00:31 The Goal: Unraveling Mysteries of the Universe
+                    : 00:00:47 Borrowing tricks from the Quantum Computer
+                    : 00:01:05 Gary Steele's Passion for Experimental Physics
+                    : 
+                    : More information
+                    : - More about this research: https://edu.nl/rrakt
+                    : - More about Gary Steele: https://edu.nl/v9tke
+                    : - More about Digital Society research at TU Delft: https://edu.nl/qdgkd
+                    : - More about the Faculty Applied Sciences at TU Delft: https://edu.nl/pq3kc
+                    : 
+                    : Social Media Channels of TU Delft
+                    : - Instagram: https://edu.nl/upny4
+                    : - LinkedIn: https://edu.nl/cb3y8
+                    : - X: https://edu.nl/drfmj
+                    : - Facebook: https://edu.nl/nkvhj
+  Duration: 00:01:44.22, start: 0.000000, bitrate: 624 kb/s
+  Chapters:
+    Chapter #0:0: start 0.000000, end 17.000000
+      Metadata:
+        title           : Meet Gary Steele: Professor of Physics at Delft University of Technology
+    Chapter #0:1: start 17.000000, end 31.000000
+      Metadata:
+        title           : Exploring Tiny Drums
+    Chapter #0:2: start 31.000000, end 47.000000
+      Metadata:
+        title           : The Goal: Unraveling Mysteries of the Universe
+    Chapter #0:3: start 47.000000, end 65.000000
+      Metadata:
+        title           : Borrowing tricks from the Quantum Computer
+    Chapter #0:4: start 65.000000, end 104.000000
+      Metadata:
+        title           : Gary Steele's Passion for Experimental Physics
+  Stream #0:0[0x1](und): Video: hevc (Main) (hev1 / 0x31766568), yuv420p(tv, bt709, progressive), 854x480, 488 kb/s, 25 fps, 25 tbr, 12800 tbn (default)
+      Metadata:
+        handler_name    : ISO Media file produced by Google Inc. Created on: 02/24/2025.
+        vendor_id       : [0][0][0][0]
+        encoder         : Lavc61.19.100 libx265
+  Stream #0:1[0x2](eng): Audio: aac (LC) (mp4a / 0x6134706D), 48000 Hz, stereo, fltp, 129 kb/s (default)
+      Metadata:
+        handler_name    : SoundHandler
+        vendor_id       : [0][0][0][0]
+  Stream #0:2[0x3](eng): Data: bin_data (text / 0x74786574), 0 kb/s
+      Metadata:
+        handler_name    : SubtitleHandler
+Stream mapping:
+  Stream #0:0 -> #0:0 (hevc (native) -> wrapped_avframe (native))
+  Stream #0:1 -> #0:1 (aac (native) -> pcm_s16le (native))
+Press [q] to stop, [?] for help
+Output #0, null, to 'NUL':
+  Metadata:
+    major_brand     : isom
+    minor_version   : 512
+    compatible_brands: isomiso2mp41
+    title           : Combining Einstein's Theory with Quantum Mechanics | TU Delft Quantum researchers highlighted
+    artist          : TU Delft
+    date            : 20240903
+    synopsis        : Join Professor Gary Steele from the Quantum Nanoscience department at TU Delft as he shares his passion for experimental physics. 
+                    : 
+                    : In his lab, Gary Steele explores the fascinating intersection of Einstein's theory of general relativity and quantum mechanics. The technologies being developed in his lab range from ultrasensitive detectors to innovative qubits for quantum computers. Lea
+                    : 
+                    : Timestamps
+                    : 00:00:00 Meet Gary Steele: Professor of Physics at Delft University of Technology
+                    : 00:00:17 Exploring Tiny Drums 
+                    : 00:00:31 The Goal: Unraveling Mysteries of the Universe
+                    : 00:00:47 Borrowing tricks from the Quantum Computer
+                    : 00:01:05 Gary Steele's Passion for Experimental Physics
+                    : 
+                    : More information
+                    : - More about this research: https://edu.nl/rrakt
+                    : - More about Gary Steele: https://edu.nl/v9tke
+                    : - More about Digital Society research at TU Delft: https://edu.nl/qdgkd
+                    : - More about the Faculty Applied Sciences at TU Delft: https://edu.nl/pq3kc
+                    : 
+                    : Social Media Channels of TU Delft
+                    : - Instagram: https://edu.nl/upny4
+                    : - LinkedIn: https://edu.nl/cb3y8
+                    : - X: https://edu.nl/drfmj
+                    : - Facebook: https://edu.nl/nkvhj
+    comment         : https://www.youtube.com/watch?v=rlVE2fivjs4
+    description     : Join Professor Gary Steele from the Quantum Nanoscience department at TU Delft as he shares his passion for experimental physics. 
+                    : 
+                    : In his lab, Gary Steele explores the fascinating intersection of Einstein's theory of general relativity and quantum mechanics. The technologies being developed in his lab range from ultrasensitive detectors to innovative qubits for quantum computers. Lea
+                    : 
+                    : Timestamps
+                    : 00:00:00 Meet Gary Steele: Professor of Physics at Delft University of Technology
+                    : 00:00:17 Exploring Tiny Drums 
+                    : 00:00:31 The Goal: Unraveling Mysteries of the Universe
+                    : 00:00:47 Borrowing tricks from the Quantum Computer
+                    : 00:01:05 Gary Steele's Passion for Experimental Physics
+                    : 
+                    : More information
+                    : - More about this research: https://edu.nl/rrakt
+                    : - More about Gary Steele: https://edu.nl/v9tke
+                    : - More about Digital Society research at TU Delft: https://edu.nl/qdgkd
+                    : - More about the Faculty Applied Sciences at TU Delft: https://edu.nl/pq3kc
+                    : 
+                    : Social Media Channels of TU Delft
+                    : - Instagram: https://edu.nl/upny4
+                    : - LinkedIn: https://edu.nl/cb3y8
+                    : - X: https://edu.nl/drfmj
+                    : - Facebook: https://edu.nl/nkvhj
+    encoder         : Lavf61.7.100
+  Chapters:
+    Chapter #0:0: start 0.000000, end 17.000000
+      Metadata:
+        title           : Meet Gary Steele: Professor of Physics at Delft University of Technology
+    Chapter #0:1: start 17.000000, end 31.000000
+      Metadata:
+        title           : Exploring Tiny Drums
+    Chapter #0:2: start 31.000000, end 47.000000
+      Metadata:
+        title           : The Goal: Unraveling Mysteries of the Universe
+    Chapter #0:3: start 47.000000, end 65.000000
+      Metadata:
+        title           : Borrowing tricks from the Quantum Computer
+    Chapter #0:4: start 65.000000, end 104.000000
+      Metadata:
+        title           : Gary Steele's Passion for Experimental Physics
+  Stream #0:0(und): Video: wrapped_avframe, yuv420p(tv, bt709, progressive), 854x480, q=2-31, 200 kb/s, 25 fps, 25 tbn (default)
+      Metadata:
+        handler_name    : ISO Media file produced by Google Inc. Created on: 02/24/2025.
+        vendor_id       : [0][0][0][0]
+        encoder         : Lavc61.19.100 wrapped_avframe
+  Stream #0:1(eng): Audio: pcm_s16le, 48000 Hz, stereo, s16, 1536 kb/s (default)
+      Metadata:
+        handler_name    : SoundHandler
+        vendor_id       : [0][0][0][0]
+        encoder         : Lavc61.19.100 pcm_s16le
+frame=  821 fps=0.0 q=-0.0 size=N/A time=00:00:32.80 bitrate=N/A speed=65.3x    frame= 1437 fps=1401 q=-0.0 size=N/A time=00:00:57.48 bitrate=N/A speed=  56x    frame= 2088 fps=1362 q=-0.0 size=N/A time=00:01:23.52 bitrate=N/A speed=54.5x    [out#0/null @ 000001ea4a178b40] video:1119KiB audio:19545KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: unknown
+frame= 2605 fps=1429 q=-0.0 Lsize=N/A time=00:01:44.20 bitrate=N/A speed=57.2x    
