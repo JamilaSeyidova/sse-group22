@@ -2,7 +2,7 @@ name: decode_2kp_h264
 description: "Decode and ignore output"
 enabled: true
 variables:
-  c: "ffmpeg -i videos/converted/2kp_H.264.mp4 -loglevel quiet -f null NUL"
+  c: "ffmpeg -i videos/converted/2160p_H.264.mp4 -loglevel quiet -f null NUL"
 linux-cmd: pwsh -Command $c
 macos-cmd: pwsh -Command $c
 windows-cmd: powershell -Command $c
