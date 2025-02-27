@@ -11,7 +11,7 @@ from scipy.integrate import simpson
 
 
 
-def get_csv_files(base_dir, machine, resolution, experiment):
+def get_csv_files(base_dir, person, resolution, decoding):
     """
     Constructs a file path dynamically and retrieves all matching CSV files.
 
@@ -22,13 +22,13 @@ def get_csv_files(base_dir, machine, resolution, experiment):
     :return: List of CSV file paths.
     """
     #constructing file path
-    csv_path = Path(base_dir) / machine / resolution / experiment / "measurements" / "*.csv"
+    csv_path = Path(base_dir) / person / resolution / decoding / "measurements" / "*.csv"
 
     file_list= glob.glob(str(csv_path))
 
     if not file_list :
         print(f"No CSV files found in the {csv_path} directory. Please check the path.")
-    exit()
+        exit()
 
     return file_list
 
@@ -43,8 +43,15 @@ def calculate_total_energy(file_list):
         # Convert time to seconds (assuming nanoseconds in original format)
         data["Time"] = (data["Time"] - data["Time"].min()) / 1e9
 
-        # Compute the total energy by integrating the area under the curve
-        total_energy = simpson(data["PACKAGE_ENERGY (J)"], data["Time"])
+        if "PACKAGE_ENERGY (J)" in data.columns:
+            # Compute the total energy by integrating the area under the curve
+            total_energy = simpson(data["PACKAGE_ENERGY (J)"], data["Time"])
+        elif "CPU_ENERGY (J)" in data.columns:
+            # Compute the total energy by integrating the area under the curve
+            total_energy = simpson(data["CPU_ENERGY (J)"], data["Time"])
+        else:
+            print(f"Energy column not found in {file}. Please check the column names.")
+            exit()
 
         total_energy_per_test.append(total_energy)
 
@@ -102,23 +109,24 @@ def qq_plot(df_results, message):
 
 # Define base directory and subdirectories
 base_dir = Path("final_results")  # This can be changed easily
-machine = "Roberto"
-resolution = "720p"
-exp1 = "decode_720p_h264"
-exp2 = "decode_720p_h265"
+person = "Roberto"
+resolution = "1080p"
+exp1 ="decode_1080p_h264"
+exp2 ="decode_1080p_h265"
 
+print(f"Analyzing results for {person} at {resolution} resolution")
 
 # Convert Path object to string for glob
-file_list_exp1 =  get_csv_files(base_dir, machine, resolution, exp1)
-file_list_exp2 =  get_csv_files(base_dir, machine, resolution, exp2)
+file_list_exp1 =  get_csv_files(base_dir, person, resolution, exp1)
+file_list_exp2 =  get_csv_files(base_dir, person, resolution, exp2)
 
 #process csv files
 total_energy_per_test_exp1 = calculate_total_energy(file_list_exp1)
 total_energy_per_test_exp2 = calculate_total_energy(file_list_exp2)
 
 # Convert to DataFrame for visualization
-df_results_1 = pd.DataFrame({"Total Energy for 1st experiment": total_energy_per_test_exp1})
-df_results_2 = pd.DataFrame({"Total Energy for 2nd experiment": total_energy_per_test_exp2})
+df_results_1 = pd.DataFrame({"Total Energy": total_energy_per_test_exp1})
+df_results_2 = pd.DataFrame({"Total Energy": total_energy_per_test_exp2})
 
 ### **Shapiro-Wilk Normality Test (Before Outlier Removal)**
 shapiro_test_exp1 = stats.shapiro(df_results_1["Total Energy"])
