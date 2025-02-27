@@ -1,6 +1,0 @@
-{
-    "startingTime": "2025-02-26T22:26:44.393420",
-    "energiBridgeCmd": "\"C:\\Users\\gijsm\\Documents\\DOCUMENTEN\\School\\Master CS\\SSE\\sse-group22\\src\\..\\energibridge\\energibridge.exe\" -i 200 --max-execution 0 -o \"results\\480p\\2025-02-26-22-26-44\\decode_480p_h264\\measurements\\25.csv\" --command-output \"results\\480p\\2025-02-26-22-26-44\\decode_480p_h264\\logs\\25.log\"",
-    "taskCmd": "powershell -Command ffmpeg -i videos/converted/480p_H.264.mp4 -loglevel quiet -f null NUL",
-    "endingTime": "2025-02-26T22:26:46.402637"
-}
