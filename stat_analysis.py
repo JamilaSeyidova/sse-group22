@@ -26,10 +26,6 @@ def get_csv_files(base_dir, machine, resolution, experiment):
 
     file_list= glob.glob(str(csv_path))
 
-    if not file_list :
-        print(f"No CSV files found in the {csv_path} directory. Please check the path.")
-    exit()
-
     return file_list
 
 def calculate_total_energy(file_list):
@@ -111,6 +107,11 @@ exp2 = "decode_720p_h265"
 # Convert Path object to string for glob
 file_list_exp1 =  get_csv_files(base_dir, machine, resolution, exp1)
 file_list_exp2 =  get_csv_files(base_dir, machine, resolution, exp2)
+
+
+if not file_list_exp1 or file_list_exp2:
+    print(f"No CSV files found in the directory. Please check the path.")
+    exit()
 
 #process csv files
 total_energy_per_test_exp1 = calculate_total_energy(file_list_exp1)
