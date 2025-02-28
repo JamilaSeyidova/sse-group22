@@ -1,6 +1,0 @@
-{
-    "startingTime": "2025-02-20T14:10:41.812849",
-    "energiBridgeCmd": "\"C:\\Users\\gijsm\\Documents\\DOCUMENTEN\\School\\Master CS\\SSE\\sse-group22\\src\\..\\energibridge\\energibridge.exe\" -i 200 --max-execution 0 -o \"C:\\Users\\gijsm\\Documents\\DOCUMENTEN\\School\\Master CS\\SSE\\sse-group22\\results\\win32\\2025-02-20-14-08-51\\fibonacci\\measurements\\15.csv\" --command-output \"C:\\Users\\gijsm\\Documents\\DOCUMENTEN\\School\\Master CS\\SSE\\sse-group22\\results\\win32\\2025-02-20-14-08-51\\fibonacci\\logs\\15.log\"",
-    "taskCmd": "powershell -Command $n = 10000; $a = [bigint]0; $b = [bigint]1; for ($i=1; $i -lt $n; $i++) { $temp = $a + $b; $a = $b; $b = $temp }; $b",
-    "endingTime": "2025-02-20T14:10:43.218723"
-}

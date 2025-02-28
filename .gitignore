@@ -1,2 +1,6 @@
 /venv/
 .idea
+/results/
+*.mp4
+*.tmp.txt
+*.pyc
