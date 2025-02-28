@@ -40,7 +40,7 @@ def calculate_total_energy(file_list):
         data["Time"] = (data["Time"] - data["Time"].min()) / 1e9
 
         # Compute the total energy by integrating the area under the curve
-        total_energy = simpson(data["PACKAGE_ENERGY (J)"], data["Time"])
+        total_energy = simpson(data["CPU_ENERGY (J)"], data["Time"])
 
         total_energy_per_test.append(total_energy)
 
@@ -69,8 +69,8 @@ def outlier_removal(df_results):
     return df_results_filtered
 
 def shapiro_wilk_test(df_results):
-    shapiro_test_filtered = stats.shapiro(df_results["Total Energy"])
-    print(f"Shapiro-Wilk Test (Filtered Data): W={shapiro_test.statistic:.4f}, p-value={shapiro_test_filtered.pvalue:.4f}")
+    shapiro_test = stats.shapiro(df_results["Total Energy"])
+    print(f"Shapiro-Wilk Test (Filtered Data): W={shapiro_test.statistic:.4f}, p-value={shapiro_test.pvalue:.4f}")
 
 def histogram_plot(df_results, experiment_name):
     ### **Histogram of Total Energy (Before Outlier Removal)**
@@ -108,8 +108,7 @@ exp2 = "decode_720p_h265"
 file_list_exp1 =  get_csv_files(base_dir, machine, resolution, exp1)
 file_list_exp2 =  get_csv_files(base_dir, machine, resolution, exp2)
 
-
-if not file_list_exp1 or file_list_exp2:
+if not file_list_exp1 or not file_list_exp2:
     print(f"No CSV files found in the directory. Please check the path.")
     exit()
 
@@ -118,8 +117,9 @@ total_energy_per_test_exp1 = calculate_total_energy(file_list_exp1)
 total_energy_per_test_exp2 = calculate_total_energy(file_list_exp2)
 
 # Convert to DataFrame for visualization
-df_results_1 = pd.DataFrame({"Total Energy for 1st experiment": total_energy_per_test_exp1})
-df_results_2 = pd.DataFrame({"Total Energy for 2nd experiment": total_energy_per_test_exp2})
+df_results_1 = pd.DataFrame({"Total Energy": total_energy_per_test_exp1})
+df_results_2 = pd.DataFrame({"Total Energy": total_energy_per_test_exp2})
+
 
 ### **Shapiro-Wilk Normality Test (Before Outlier Removal)**
 shapiro_test_exp1 = stats.shapiro(df_results_1["Total Energy"])
@@ -141,10 +141,8 @@ shapiro_wilk_test(df_results_1_filtered)
 shapiro_wilk_test(df_results_2_filtered)
 
 ### **Welch’s T-test (Two-sided)** (but we will use sample a sample b later, since i have no other results i just use these)
-sample_a = df_results["Total Energy"]
-sample_b = df_results_filtered["Total Energy"]
-t_stat, p_value = ttest_ind(df_results_1_filtered, 
-                            df_results_1_filtered, 
+t_stat, p_value = ttest_ind(df_results_1_filtered["Total Energy"], 
+                            df_results_2_filtered["Total Energy"], 
                             equal_var=False,  # Welch’s t-test assumption
                             alternative='two-sided')
 
