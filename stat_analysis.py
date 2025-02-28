@@ -63,6 +63,7 @@ def violin_box_plot(df_results, experiment, person):
 
     plt.ylabel("Total Energy (J)")
     plt.title(f"Violin + Box Plot of Total Energy per Test ({experiment})")
+    plt.title(f"Violin + Box Plot of Total Energy per Test ({experiment})")
     plt.grid(True)
     # Create the directory if it doesn't exist
     output_dir = f"{person}_graphs"
@@ -110,9 +111,9 @@ def outlier_removal(df_results):
 
     return df_results_filtered
 
-def shapiro_wilk_test(df_results):
+def shapiro_wilk_test(df_results, message):
     shapiro_test = stats.shapiro(df_results["Total Energy"])
-    print(f"Shapiro-Wilk Test (Filtered Data): W={shapiro_test.statistic:.4f}, p-value={shapiro_test.pvalue:.4f}")
+    print(f"Shapiro-Wilk Test ({message}): W={shapiro_test.statistic:.4f}, p-value={shapiro_test.pvalue:.4f}")
 
 def histogram_plot(df_results, experiment_name):
     ### **Histogram of Total Energy (Before Outlier Removal)**
@@ -140,13 +141,15 @@ def qq_plot(df_results, message):
 
 # Define base directory and subdirectories
 base_dir = Path("final_results")  # This can be changed easily
-person = "Roberto"
-resolution = "1080p"
-exp1 ="decode_1080p_h264"
-exp2 ="decode_1080p_h265"
+person = "Michael"
+resolution = "480p"
+exp1 = f"decode_{resolution}_h264"
+exp2 = f"decode_{resolution}_h265"
 experiment = "decode_1080p"
 
 print(f"Analyzing results for {person} at {resolution} resolution")
+
+
 
 # Convert Path object to string for glob
 file_list_exp1 =  get_csv_files(base_dir, person, resolution, exp1)
@@ -182,8 +185,8 @@ df_results_1_filtered = outlier_removal(df_results_1)
 df_results_2_filtered = outlier_removal(df_results_2)
 
 #Shapiro-Wilk Test after outlier removal 
-shapiro_wilk_test(df_results_1_filtered)
-shapiro_wilk_test(df_results_2_filtered)
+shapiro_wilk_test(df_results_1_filtered, exp1)
+shapiro_wilk_test(df_results_2_filtered, exp2)
 
 ### **Welch’s T-test (Two-sided)** (but we will use sample a sample b later, since i have no other results i just use these)
 t_stat, p_value = ttest_ind(df_results_1_filtered["Total Energy"], 
@@ -195,7 +198,7 @@ print(f"Welch’s T-test Results: t-statistic={t_stat:.4f}, p-value={p_value:.4f
 
 # Interpretation of p-value
 if p_value < 0.05:
-    print("Statistically significant difference detected between full dataset and filtered dataset (p < 0.05)")
+    print("Statistically significant difference detected between experiment datasets (p < 0.05)")
 else:
     print("No statistically significant difference detected (p >= 0.05)")
 
@@ -241,8 +244,8 @@ cohens_d = mean_diff / pooled_std  # Effect size
 
 ### **Print the Results**
 print(f"\n--- Difference Metrics ---")
-print(f"Mean (All Data): {std_exp1:.4f} J")
-print(f"Mean (Filtered Data): {std_exp2:.4f} J")
+print(f"Mean ({exp1}): {std_exp1:.4f} J")
+print(f"Mean ({exp2}): {std_exp2:.4f} J")
 print(f"Mean Difference: {mean_diff:.4f} J")
 print(f"Percent Change: {percent_change:.2f}%")
 print(f"Cohen’s d: {cohens_d:.4f} (Effect size)")
