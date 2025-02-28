@@ -13,15 +13,6 @@ from scipy.integrate import simpson
 
 
 def get_csv_files(base_dir, person, resolution, decoding):
-    """
-    Constructs a file path dynamically and retrieves all matching CSV files.
-
-    :param base_dir: The base directory where results are stored.
-    :param machine: The machine folder on which the experiment run.
-    :param resolution: The resolution folder.
-    :param experiment: The experiment folder.
-    :return: List of CSV file paths.
-    """
     #constructing file path
     csv_path = Path(base_dir) / person / resolution / decoding / "measurements" / "*.csv"
 
@@ -71,7 +62,7 @@ def violin_box_plot(df_results, experiment, person):
     plt.title(f"Violin + Box Plot of Total Energy per Test ({experiment})")
     plt.grid(True)
     # Create the directory if it doesn't exist
-    output_dir = f"{person}_graphs"
+    output_dir = f"{person}_graphs/{resolution}"
     os.makedirs(output_dir, exist_ok=True)
     
     plot_name = os.path.join(output_dir, f"{person}_violin_box_{experiment}.png")
@@ -88,7 +79,7 @@ def combined_violin_box_plot(df_list, labels, experiment, person):
     # Combine the DataFrames
     combined_df = pd.concat(df_list)
 
-    plt.figure(figsize=(10, 6))
+    plt.figure(figsize=(10, 10))
     sns.violinplot(x="Label", y="Total Energy", data=combined_df, inner=None, linewidth=1)
     sns.boxplot(x="Label", y="Total Energy", data=combined_df, width=0.3, boxprops={'zorder': 2, 'facecolor': 'none'}, showcaps=True, whiskerprops={'linewidth': 2}, medianprops={'color': 'red'}, flierprops={'marker': 'o', 'color': 'black', 'alpha': 0.5})
     sns.stripplot(x="Label", y="Total Energy", data=combined_df, color="black", alpha=0.3, size=4)
@@ -146,8 +137,8 @@ def qq_plot(df_results, message):
 
 # Define base directory and subdirectories
 base_dir = Path("final_results")  # This can be changed easily
-person = "Roberto"
-resolution = "720p"
+person = "Gijs"
+resolution = "480p"
 exp1 = f"decode_{resolution}_h264"
 exp2 = f"decode_{resolution}_h265"
 experiment = f"decode_{resolution}"
@@ -183,12 +174,12 @@ print(f"Shapiro-Wilk Test {exp2}: W={shapiro_test_exp2.statistic:.4f}, p-value={
 violin_box_plot(df_results_1, exp1, person)
 violin_box_plot(df_results_2, exp2, person)
 
-combined_violin_box_plot([df_results_1, df_results_2], ["H264", "H265"], experiment, person)
-
 
 #Outlier Removal
 df_results_1_filtered = outlier_removal(df_results_1)
 df_results_2_filtered = outlier_removal(df_results_2)
+
+combined_violin_box_plot([df_results_1, df_results_2], ["H264", "H265"], experiment, person)
 
 #Shapiro-Wilk Test after outlier removal 
 shapiro_wilk_test(df_results_1_filtered, exp1)
@@ -211,6 +202,9 @@ else:
 ### **Plot Data After Outlier Removal**
 violin_box_plot(df_results_1_filtered, f"{exp1}_filtered", person)
 violin_box_plot(df_results_2_filtered, f"{exp2}_filtered", person)
+
+combined_violin_box_plot([df_results_1_filtered, df_results_2_filtered], ["H264", "H265"], experiment+" filtered results", person)
+
 
 ### **Histogram of Total Energy (Before Outlier Removal)**
 histogram_plot(df_results_1, exp1)
