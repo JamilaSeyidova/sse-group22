@@ -185,9 +185,6 @@ violin_box_plot(df_results_2, exp2, person)
 
 combined_violin_box_plot([df_results_1, df_results_2], ["H264", "H265"], experiment, person)
 
-print("####################")
-print(df_results_1.iloc[:, 0])  # Prints first column
-print("####################")
 
 #Outlier Removal
 df_results_1_filtered = outlier_removal(df_results_1)
