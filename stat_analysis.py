@@ -1,3 +1,4 @@
+import os
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -26,10 +27,6 @@ def get_csv_files(base_dir, person, resolution, decoding):
 
     file_list= glob.glob(str(csv_path))
 
-    if not file_list :
-        print(f"No CSV files found in the {csv_path} directory. Please check the path.")
-    exit()
-
     return file_list
 
 def calculate_total_energy(file_list):
@@ -57,7 +54,7 @@ def calculate_total_energy(file_list):
 
     return total_energy_per_test
 
-def violin_box_plot(df_results, experiment):
+def violin_box_plot(df_results, experiment, person):
     ### **Plot All Data (Before Outlier Removal)**
     plt.figure(figsize=(10, 6))
     sns.violinplot(y=df_results["Total Energy"], inner=None, color="lightblue", linewidth=1)
@@ -65,18 +62,52 @@ def violin_box_plot(df_results, experiment):
     sns.stripplot(y=df_results["Total Energy"], color="black", alpha=0.3, size=4)
 
     plt.ylabel("Total Energy (J)")
-    plt.title("Violin + Box Plot of Total Energy per Test (All Data)")
+    plt.title(f"Violin + Box Plot of Total Energy per Test ({experiment})")
     plt.grid(True)
-    plot_name = f"violin_box_{experiment}.png"
+    # Create the directory if it doesn't exist
+    output_dir = f"{person}_graphs"
+    os.makedirs(output_dir, exist_ok=True)
+    
+    plot_name = os.path.join(output_dir, f"{person}_violin_box_{experiment}.png")
     plt.savefig(plot_name)
     plt.show()
 
     print(f"Violin + Box plot saved as {plot_name}")
 
+def combined_violin_box_plot(df_list, labels, experiment, person):
+    # Add a column to each DataFrame to indicate the label
+    for df, label in zip(df_list, labels):
+        df["Label"] = label
+
+    # Combine the DataFrames
+    combined_df = pd.concat(df_list)
+
+    plt.figure(figsize=(10, 6))
+    sns.violinplot(x="Label", y="Total Energy", data=combined_df, inner=None, linewidth=1)
+    sns.boxplot(x="Label", y="Total Energy", data=combined_df, width=0.3, boxprops={'zorder': 2, 'facecolor': 'none'}, showcaps=True, whiskerprops={'linewidth': 2}, medianprops={'color': 'red'}, flierprops={'marker': 'o', 'color': 'black', 'alpha': 0.5})
+    sns.stripplot(x="Label", y="Total Energy", data=combined_df, color="black", alpha=0.3, size=4)
+
+    plt.ylabel("Total Energy (J)")
+    plt.title(f"Combined Violin + Box Plot of Total Energy per Test {experiment}")
+    plt.grid(True)
+    plt.legend()
+
+    # Create the directory if it doesn't exist
+    output_dir = f"{person}_graphs"
+    os.makedirs(output_dir, exist_ok=True)
+    
+    plot_name = os.path.join(output_dir, f"{person}_combined_violin_box_{experiment}.png")
+    plt.savefig(plot_name)
+    plt.show()
+
+    print(f"Combined Violin + Box plot saved as {plot_name}")
+
 def outlier_removal(df_results):
     ### **Outlier Removal (Z-score Method)**
     z_scores = stats.zscore(df_results["Total Energy"])
     df_results_filtered = df_results[np.abs(z_scores) < 3]  # Keep only values within 3 standard deviations
+    #print(f"Number of outliers removed: {len(df_results) - len(df_results_filtered)}")
+
     return df_results_filtered
 
 def shapiro_wilk_test(df_results):
@@ -113,6 +144,7 @@ person = "Roberto"
 resolution = "1080p"
 exp1 ="decode_1080p_h264"
 exp2 ="decode_1080p_h265"
+experiment = "decode_1080p"
 
 print(f"Analyzing results for {person} at {resolution} resolution")
 
@@ -124,17 +156,13 @@ if not file_list_exp1 or not file_list_exp2:
     print(f"No CSV files found in the directory. Please check the path.")
     exit()
 
-if not file_list_exp1 or not file_list_exp2:
-    print(f"No CSV files found in the directory. Please check the path.")
-    exit()
-
 #process csv files
 total_energy_per_test_exp1 = calculate_total_energy(file_list_exp1)
 total_energy_per_test_exp2 = calculate_total_energy(file_list_exp2)
 
 # Convert to DataFrame for visualization
-df_results_1 = pd.DataFrame({"Total Energy for 1st experiment": total_energy_per_test_exp1})
-df_results_2 = pd.DataFrame({"Total Energy for 2nd experiment": total_energy_per_test_exp2})
+df_results_1 = pd.DataFrame({"Total Energy": total_energy_per_test_exp1})
+df_results_2 = pd.DataFrame({"Total Energy": total_energy_per_test_exp2})
 
 ### **Shapiro-Wilk Normality Test (Before Outlier Removal)**
 shapiro_test_exp1 = stats.shapiro(df_results_1["Total Energy"])
@@ -144,8 +172,10 @@ print(f"Shapiro-Wilk Test {exp1}: W={shapiro_test_exp1.statistic:.4f}, p-value={
 print(f"Shapiro-Wilk Test {exp2}: W={shapiro_test_exp2.statistic:.4f}, p-value={shapiro_test_exp2.pvalue:.4f}")
 
 # Visualize violin + box plots
-violin_box_plot(df_results_1, exp1)
-violin_box_plot(df_results_2, exp2)
+violin_box_plot(df_results_1, exp1, person)
+violin_box_plot(df_results_2, exp2, person)
+
+combined_violin_box_plot([df_results_1, df_results_2], ["H264", "H265"], experiment, person)
 
 #Outlier Removal
 df_results_1_filtered = outlier_removal(df_results_1)
@@ -170,23 +200,23 @@ else:
     print("No statistically significant difference detected (p >= 0.05)")
 
 ### **Plot Data After Outlier Removal**
-violin_box_plot(df_results_1_filtered, "exp1_filtered")
-violin_box_plot(df_results_2_filtered, "exp2_filtered")
+violin_box_plot(df_results_1_filtered, f"{exp1}_filtered", person)
+violin_box_plot(df_results_2_filtered, f"{exp2}_filtered", person)
 
 ### **Histogram of Total Energy (Before Outlier Removal)**
 histogram_plot(df_results_1, exp1)
-histogram_plot(df_results_1_filtered, "exp1_filtered")
+histogram_plot(df_results_1_filtered, f"{exp1}_filtered")
 
 histogram_plot(df_results_2, exp2)
-histogram_plot(df_results_2_filtered, "exp2_filtered")
+histogram_plot(df_results_2_filtered, f"{exp2}_filtered")
 
 ### **QQ Plot to Check Normality (Before Outlier Removal)**
 qq_plot(df_results_1, exp1)
-qq_plot(df_results_1_filtered, "exp1_filtered")
+qq_plot(df_results_1_filtered, f"{exp1}_filtered")
 
 
 qq_plot(df_results_2, exp1)
-qq_plot(df_results_2_filtered, "exp2_filtered")
+qq_plot(df_results_2_filtered, f"{exp2}_filtered")
 
 
 ###########################
