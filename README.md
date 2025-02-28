@@ -23,6 +23,7 @@ winget install ffmpeg
 ### 3. Configure Video
 Put the video you want to run the experiments with inside `videos>Original`.
 This can, for example, be a 4K mp4 video which gets converted to other formats and resolutions for the experiments.
+Here you can find the video that was used for the experiments: [4k.mp4](https://drive.google.com/drive/folders/1szMRa1EiEV6eTaOxet7m-NW5r2Phh-6_?usp=sharing.)
 
 ### 4. Install dependencies
 Install all the required dependencies by running `pip install -r requirements.txt`.
