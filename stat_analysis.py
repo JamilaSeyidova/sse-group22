@@ -33,22 +33,27 @@ def calculate_total_energy(file_list):
     # Store total energy values for each test
     total_energy_per_test = []
 
+    # print(f"printing experiment results of {filename}")
+
     # Process each file separately
     for file in file_list:
         data = pd.read_csv(file)
+
+        filename = os.path.basename(file)
+
 
         # Convert time to seconds (assuming nanoseconds in original format)
         data["Time"] = (data["Time"] - data["Time"].min()) / 1e9
 
         if "PACKAGE_ENERGY (J)" in data.columns:
-            # Compute the total energy by integrating the area under the curve
-            total_energy = simpson(data["PACKAGE_ENERGY (J)"], data["Time"])
+            total_energy = data["PACKAGE_ENERGY (J)"].iloc[-1] - data["PACKAGE_ENERGY (J)"].iloc[0]
         elif "CPU_ENERGY (J)" in data.columns:
-            # Compute the total energy by integrating the area under the curve
-            total_energy = simpson(data["CPU_ENERGY (J)"], data["Time"])
+            total_energy = data["CPU_ENERGY (J)"].iloc[-1] - data["CPU_ENERGY (J)"].iloc[0]
         else:
             print(f"Energy column not found in {file}. Please check the column names.")
             exit()
+
+        # print(f"{total_energy} - Total energy consumption in file {filename}.")
 
         total_energy_per_test.append(total_energy)
 
@@ -141,11 +146,11 @@ def qq_plot(df_results, message):
 
 # Define base directory and subdirectories
 base_dir = Path("final_results")  # This can be changed easily
-person = "Michael"
-resolution = "480p"
+person = "Roberto"
+resolution = "720p"
 exp1 = f"decode_{resolution}_h264"
 exp2 = f"decode_{resolution}_h265"
-experiment = "decode_1080p"
+experiment = f"decode_{resolution}"
 
 print(f"Analyzing results for {person} at {resolution} resolution")
 
@@ -179,6 +184,10 @@ violin_box_plot(df_results_1, exp1, person)
 violin_box_plot(df_results_2, exp2, person)
 
 combined_violin_box_plot([df_results_1, df_results_2], ["H264", "H265"], experiment, person)
+
+print("####################")
+print(df_results_1.iloc[:, 0])  # Prints first column
+print("####################")
 
 #Outlier Removal
 df_results_1_filtered = outlier_removal(df_results_1)
